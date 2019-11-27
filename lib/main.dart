@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
+
 class MyHomePage extends StatelessWidget {
   // String titleInput;
   // String amountInput;
