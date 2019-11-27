@@ -34,7 +34,7 @@ class MyHomePage extends StatelessWidget {
                 child: Text("Chart"),
                 color: Colors.pink,
               ),
-              elevation: 5,
+              elevation: 50,
             ),
 
             UserTransactions(),
