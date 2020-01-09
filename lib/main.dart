@@ -1,4 +1,6 @@
-import 'package:app2/Widgets/user_transactions.dart';
+import './Widgets/new_transaction.dart';
+import './Widgets/transaction_list.dart';
+import './Models/Transaction.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -6,44 +8,82 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter App',
+      title: 'My Expense Pal',
       home: MyHomePage(),
     );
   }
 }
 
-
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
   // String titleInput;
   // String amountInput;
 
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Flutter App"),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          //mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Card(
-              child: Container(
-                padding: EdgeInsets.all(10),
-                width: double.infinity,
-                child: Text("Chart"),
-                color: Colors.pink,
-              ),
-              elevation: 5,
-            ),
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
 
-            UserTransactions(),
-            // Column(
-            //     //children: ,
-            //     ),
+class _MyHomePageState extends State<MyHomePage> {
+  void _startAddNewTransaction(BuildContext ctx) {
+    showModalBottomSheet(
+      context: ctx,
+      builder: (_) {
+        return NewTransaction(_addNewTransaction);
+      },
+    );
+  }
+
+  final List<Transaction> _userTransactions = [];
+
+  void _addNewTransaction(String txtitle, double txamount) {
+    final newTx = Transaction(
+      title: txtitle,
+      amount: txamount,
+      date: DateTime.now(),
+      id: DateTime.now().toString(),
+    );
+    setState(() {
+      _userTransactions.add(newTx);
+    });
+
+    Widget build(BuildContext context) {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text("My Expense Pal"),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.add),
+              onPressed: () => _startAddNewTransaction(context),
+            )
           ],
         ),
-      ),
-    );
+        body: SingleChildScrollView(
+          child: Column(
+            //mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Card(
+                child: Container(
+                  padding: EdgeInsets.all(10),
+                  width: double.infinity,
+                  child: Text("Chart"),
+                  color: Colors.pink,
+                ),
+                elevation: 5,
+              ),
+
+              TransactionList(_userTransactions),
+              // Column(
+              //     //children: ,
+              //     ),
+            ],
+          ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.add),
+          onPressed: () => _startAddNewTransaction(context),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      );
+    }
   }
 }
