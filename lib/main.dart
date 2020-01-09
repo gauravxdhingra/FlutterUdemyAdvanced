@@ -11,7 +11,24 @@ class MyApp extends StatelessWidget {
       title: 'My Expense Pal',
       theme: ThemeData(
         primarySwatch: Colors.pink,
-        accentColor: Colors.orange,
+        accentColor: Colors.red,
+        fontFamily: 'Montserrat',
+        textTheme: ThemeData.light().textTheme.copyWith(
+              title: TextStyle(
+                fontFamily: 'Montserrat',
+                fontWeight: FontWeight.bold,
+                fontSize: 17,
+              ),
+            ),
+        appBarTheme: AppBarTheme(
+          textTheme: ThemeData.light().textTheme.copyWith(
+                title: TextStyle(
+                  fontFamily: 'SECRCODE',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
+              ),
+        ),
       ),
       home: MyHomePage(),
     );
