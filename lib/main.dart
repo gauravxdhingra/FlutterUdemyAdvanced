@@ -41,49 +41,52 @@ class _MyHomePageState extends State<MyHomePage> {
       date: DateTime.now(),
       id: DateTime.now().toString(),
     );
-    setState(() {
-      _userTransactions.add(newTx);
-    });
 
-    Widget build(BuildContext context) {
-      return Scaffold(
-        appBar: AppBar(
-          title: Text("My Expense Pal"),
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.add),
-              onPressed: () => _startAddNewTransaction(context),
-            )
+    setState(
+      () {
+        _userTransactions.add(newTx);
+      },
+    );
+  }
+
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("My Expense Pal"),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () => _startAddNewTransaction(context),
+          )
+        ],
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          //mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Card(
+              child: Container(
+                padding: EdgeInsets.all(10),
+                width: double.infinity,
+                child: Text("Chart"),
+                color: Colors.pink,
+              ),
+              elevation: 5,
+            ),
+
+            TransactionList(_userTransactions),
+            // Column(
+            //     //children: ,
+            //     ),
           ],
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            //mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Card(
-                child: Container(
-                  padding: EdgeInsets.all(10),
-                  width: double.infinity,
-                  child: Text("Chart"),
-                  color: Colors.pink,
-                ),
-                elevation: 5,
-              ),
-
-              TransactionList(_userTransactions),
-              // Column(
-              //     //children: ,
-              //     ),
-            ],
-          ),
-        ),
-        floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add),
-          onPressed: () => _startAddNewTransaction(context),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      );
-    }
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () => _startAddNewTransaction(context),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+    );
   }
 }
