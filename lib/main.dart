@@ -9,6 +9,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'My Expense Pal',
+      theme: ThemeData(
+        primarySwatch: Colors.pink,
+        accentColor: Colors.orange,
+      ),
       home: MyHomePage(),
     );
   }
