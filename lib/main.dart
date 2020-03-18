@@ -177,15 +177,15 @@ class _MyHomePageState extends State<MyHomePage> {
 
             if (!isLandscape)
               txListWidget,
-
-            _showChart
-                ? Container(
-                    height: (mediaQuery.size.height -
-                            appBar.preferredSize.height -
-                            mediaQuery.padding.top) *
-                        0.7,
-                    child: Chart(_recentTransactions))
-                : txListWidget,
+            if (isLandscape)
+              _showChart
+                  ? Container(
+                      height: (mediaQuery.size.height -
+                              appBar.preferredSize.height -
+                              mediaQuery.padding.top) *
+                          0.7,
+                      child: Chart(_recentTransactions))
+                  : txListWidget,
             // Column(
             //     //children: ,
             //     ),
