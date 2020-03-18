@@ -36,22 +36,56 @@ class _NewTransactionState extends State<NewTransaction> {
     Navigator.of(context).pop();
   }
 
-  void _presentDatePicker() {
-    showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2020),
-      lastDate: DateTime.now(),
-    ).then(
-      (pickedDate) {
-        if (pickedDate == null) {
-          return;
-        }
-        setState(() {
-          _selectedDate = pickedDate;
-        });
-      },
-    );
+  void _presentDatePicker(BuildContext ctx) {
+    Platform.isIOS
+        ? showModalBottomSheet(
+            context: ctx,
+            builder: (_) {
+              return Column(
+                children: <Widget>[
+                  SizedBox(
+                    height: 200,
+                    child: CupertinoDatePicker(
+                      // minimumDate: DateTime(2019),
+                      // maximumDate: DateTime.now(),
+                      // initialDateTime: DateTime.now(),
+                      mode: CupertinoDatePickerMode.date,
+                      onDateTimeChanged: (dateTime) {
+                        setState(() {
+                          _selectedDate = dateTime;
+                          print(_selectedDate);
+                        });
+                      },
+                    ),
+                  ),
+                  CupertinoButton(
+                    child: Text('Chose Date'),
+                    onPressed: () => Navigator.of(context).pop(),
+                  )
+                ],
+              );
+              // CupertinoButton(
+              //   child: Text('Chose Date'),
+              //   onPressed: () => print(_selectedDate),
+              // )
+            },
+            // child:
+          )
+        : showDatePicker(
+            context: context,
+            initialDate: DateTime.now(),
+            firstDate: DateTime(2020),
+            lastDate: DateTime.now(),
+          ).then(
+            (pickedDate) {
+              if (pickedDate == null) {
+                return;
+              }
+              setState(() {
+                _selectedDate = pickedDate;
+              });
+            },
+          );
     print("...");
   }
 
@@ -109,14 +143,14 @@ class _NewTransactionState extends State<NewTransaction> {
                     ),
                     Platform.isIOS
                         ? CupertinoButton(
-                            onPressed: _presentDatePicker,
+                            onPressed: () => _presentDatePicker(context),
                             child: Text(
                               'Chose Date',
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
                           )
                         : FlatButton(
-                            onPressed: _presentDatePicker,
+                            onPressed: () => _presentDatePicker(context),
                             child: Text(
                               'Chose Date',
                               style: TextStyle(fontWeight: FontWeight.bold),
