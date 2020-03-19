@@ -21,7 +21,7 @@ class TransactionList extends StatelessWidget {
                 Container(
                   height: constraints.maxHeight * 0.3,
                   child: Image.asset(
-                    'assets/img/—Pngtree—waiting icon_4419983.png',
+                    'assets/img/Waiting.png',
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -50,7 +50,10 @@ class TransactionList extends StatelessWidget {
                   ),
                   subtitle: Text(
                     DateFormat.yMMMMEEEEd().format(transactions[index].date),
-                    style: TextStyle(color: Colors.grey),
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 15,
+                    ),
                   ),
                   trailing: MediaQuery.of(context).size.width > 460
                       ? FlatButton.icon(
