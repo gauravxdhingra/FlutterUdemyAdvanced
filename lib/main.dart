@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         textTheme: ThemeData.light().textTheme.copyWith(
               title: TextStyle(
                 fontFamily: 'Montserrat',
-                fontWeight: FontWeight.bold,
+                // fontWeight: FontWeight.bold,
                 fontSize: 17,
               ),
               button: TextStyle(color: Colors.white),
@@ -37,13 +37,14 @@ class MyApp extends StatelessWidget {
         appBarTheme: AppBarTheme(
           textTheme: ThemeData.light().textTheme.copyWith(
                 title: TextStyle(
-                  fontFamily: 'SECRCODE',
-                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Montserrat',
+                  // fontWeight: FontWeight.bold,
                   fontSize: 20,
                 ),
               ),
         ),
       ),
+      debugShowCheckedModeBanner: false,
       home: MyHomePage(),
     );
   }

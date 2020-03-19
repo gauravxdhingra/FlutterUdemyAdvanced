@@ -18,7 +18,16 @@ class Chartbar extends StatelessWidget {
             Container(
               height: constraints.maxHeight * 0.15,
               child: FittedBox(
-                child: Text('\$${spendingAmount.toStringAsFixed(0)}'),
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  '\$${spendingAmount.toStringAsFixed(0)}',
+                  style: TextStyle(
+                      color: Theme.of(context).primaryColor,
+                      fontSize: 25,
+                      fontWeight: FontWeight.w400
+                      // color: Colors.pink,
+                      ),
+                ),
               ),
             ),
             SizedBox(
@@ -51,9 +60,21 @@ class Chartbar extends StatelessWidget {
             SizedBox(
               height: constraints.maxHeight * 0.05,
             ),
+            Divider(
+              height: 0,
+            ),
             Container(
                 height: constraints.maxHeight * 0.15,
-                child: FittedBox(child: Text(label))),
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(
+                    label,
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
+                )),
           ],
         );
       },

@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import 'package:flutter_cupertino_date_picker/flutter_cupertino_date_picker.dart';
+
 class NewTransaction extends StatefulWidget {
   final Function addtx;
 
@@ -38,39 +40,62 @@ class _NewTransactionState extends State<NewTransaction> {
 
   void _presentDatePicker(BuildContext ctx) {
     Platform.isIOS
-        ? showModalBottomSheet(
-            context: ctx,
-            builder: (_) {
-              return Column(
-                children: <Widget>[
-                  SizedBox(
-                    height: 200,
-                    child: CupertinoDatePicker(
-                      // minimumDate: DateTime(2019),
-                      // maximumDate: DateTime.now(),
-                      // initialDateTime: DateTime.now(),
-                      mode: CupertinoDatePickerMode.date,
-                      onDateTimeChanged: (dateTime) {
-                        setState(() {
-                          _selectedDate = dateTime;
-                          print(_selectedDate);
-                        });
-                      },
-                    ),
-                  ),
-                  CupertinoButton(
-                    child: Text('Chose Date'),
-                    onPressed: () => Navigator.of(context).pop(),
-                  )
-                ],
-              );
-              // CupertinoButton(
-              //   child: Text('Chose Date'),
-              //   onPressed: () => print(_selectedDate),
-              // )
-            },
-            // child:
-          )
+        ?
+        // ? showModalBottomSheet(
+        //     // isScrollControlled: true,
+        //     context: ctx,
+        //     builder: (_) {
+        //       return FractionallySizedBox(
+        //         heightFactor: 0.6,
+        //         child: Column(
+        //           children: <Widget>[
+        //             SizedBox(
+        //               height: 180,
+        //               child: CupertinoDatePicker(
+        //                 // minimumDate: DateTime(2019),
+        //                 // maximumDate: DateTime.now(),
+        //                 initialDateTime: DateTime.now(),
+
+        //                 mode: CupertinoDatePickerMode.date,
+        //                 onDateTimeChanged: (dateTime) {
+        //                   setState(() {
+        //                     if (dateTime == null) dateTime = DateTime.now();
+        //                     _selectedDate = dateTime;
+        //                     print(_selectedDate);
+        //                   });
+        //                 },
+        //               ),
+        //             ),
+        //             CupertinoButton(
+        //                 child: Text(
+        //                   'Chose Date',
+        //                   style: TextStyle(
+        //                     fontWeight: FontWeight.bold,
+        //                   ),
+        //                 ),
+        //                 onPressed: () {
+        //                   Navigator.of(context).pop();
+        //                 })
+        //           ],
+        //         ),
+        //       );
+        //       // CupertinoButton(
+        //       //   child: Text('Chose Date'),
+        //       //   onPressed: () => print(_selectedDate),
+        //       // )
+        //     },
+        //     // child:
+        //   )
+
+        DatePicker.showDatePicker(context, onConfirm: (date, i) {
+            print(date);
+            _selectedDate = date;
+            // setState(() {
+            //   date = _selectedDate;
+            //   print(_selectedDate);
+            //   print(date);
+            // });
+          })
         : showDatePicker(
             context: context,
             initialDate: DateTime.now(),
@@ -106,29 +131,41 @@ class _NewTransactionState extends State<NewTransaction> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: <Widget>[
-              TextField(
-                // onChanged: (val) {
-                //   titleInput = val;
-                // },
+              Platform.isIOS
+                  ? CupertinoTextField(
+                      controller: _titleController,
+                      placeholder: 'Title',
+                    )
+                  : TextField(
+                      // onChanged: (val) {
+                      //   titleInput = val;
+                      // },
 
-                controller: _titleController,
-                decoration: InputDecoration(
-                  labelText: 'Title',
-                ),
-              ),
-              TextField(
-                // onChanged: (val) {
-                //   amountInput = val;
-                // },
+                      controller: _titleController,
+                      decoration: InputDecoration(
+                        labelText: 'Title',
+                      ),
+                    ),
+              Platform.isIOS
+                  ? CupertinoTextField(
+                      controller: _amountController,
+                      placeholder: 'Amount',
+                      keyboardType: TextInputType.numberWithOptions(),
+                      onSubmitted: (_) => _submitData(),
+                    )
+                  : TextField(
+                      // onChanged: (val) {
+                      //   amountInput = val;
+                      // },
 
-                controller: _amountController,
-                decoration: InputDecoration(
-                  labelText: 'Amount',
-                ),
+                      controller: _amountController,
+                      decoration: InputDecoration(
+                        labelText: 'Amount',
+                      ),
 
-                keyboardType: TextInputType.numberWithOptions(),
-                onSubmitted: (_) => _submitData(),
-              ),
+                      keyboardType: TextInputType.numberWithOptions(),
+                      onSubmitted: (_) => _submitData(),
+                    ),
               Container(
                 height: 60,
                 child: Row(
