@@ -23,7 +23,7 @@ class Chartbar extends StatelessWidget {
                   '\$${spendingAmount.toStringAsFixed(0)}',
                   style: TextStyle(
                       color: Theme.of(context).primaryColor,
-                      fontSize: 25,
+                      fontSize: 18,
                       fontWeight: FontWeight.w400
                       // color: Colors.pink,
                       ),

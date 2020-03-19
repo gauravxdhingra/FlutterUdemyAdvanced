@@ -15,11 +15,11 @@ class TransactionList extends StatelessWidget {
               children: <Widget>[
                 Text(
                   '\nNo Transactions Added!',
-                  style: Theme.of(context).textTheme.title,
+                  style: Theme.of(context).textTheme.body1,
                 ),
                 SizedBox(),
                 Container(
-                  height: constraints.maxHeight * 0.6,
+                  height: constraints.maxHeight * 0.3,
                   child: Image.asset(
                     'assets/img/—Pngtree—waiting icon_4419983.png',
                     fit: BoxFit.cover,
